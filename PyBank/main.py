@@ -1,9 +1,10 @@
 # Import modules
+import os
 import csv
 
 # File variables
-file_input = "Resources/budget_data.csv"
-file_output = "analysis/bank_analysis.txt"
+file_input = os.path.join("Resources","budget_data.csv")
+file_output = os.path.join("analysis","bank_analysis.txt")
 
 # Data variables
 total_months = 0
@@ -24,7 +25,7 @@ section_break = "----------------------------------"
 output_rows = []
 
 # Read data file
-with open(file_input, encoding='utf-8') as csv_file:
+with open(file_input, 'r', encoding='utf-8') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     csv_header = next(csv_reader)
 
@@ -42,9 +43,7 @@ with open(file_input, encoding='utf-8') as csv_file:
             current_change = current_profit - last_profit
         
         last_profit = current_profit
-        total_change += current_change
-
-        print (f"Current Change: {current_change}  Total Change: {total_change}")
+        total_change += current_change        
 
         # Check if the current row has the greatest increase or decrease in profit
         if current_change > greatest_increase_amount:
@@ -55,7 +54,7 @@ with open(file_input, encoding='utf-8') as csv_file:
             greatest_decrease_month = current_month
 
 # Calculate average month-over-month change
-# Reduce total months by 1 because there's no change for the first month
+# Use (total_months - 1) because there's no change for the first month
 mean_change = total_change / (total_months - 1)
 
 # Create output list
