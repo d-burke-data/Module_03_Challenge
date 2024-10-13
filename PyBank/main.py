@@ -26,7 +26,10 @@ output_rows = []
 
 # Read data file
 with open(file_input, 'r', encoding='utf-8') as csv_file:
+    #Read as CSV file    
     csv_reader = csv.reader(csv_file, delimiter=',')
+
+    # Store header row
     csv_header = next(csv_reader)
 
     for row in csv_reader:

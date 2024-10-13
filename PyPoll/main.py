@@ -21,8 +21,8 @@ with open(file_input, 'r', encoding='utf-8') as csv_file:
     # Read as CSV file
     csv_reader = csv.reader(csv_file, delimiter=',')
 
-    # Read header row
-    next(csv_reader, None)
+    # Store header row
+    csv_header = next(csv_reader)
 
     # Read data rows
     for row in csv_reader:
