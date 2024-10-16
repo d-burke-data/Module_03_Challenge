@@ -35,7 +35,7 @@ with open(file_input, 'r', encoding='utf-8') as csv_file:
             candidates[current_candidate] = [0, 0.0]
 
         # Increment the vote count for this candidate
-        candidates[current_candidate][0] += 1        
+        candidates[current_candidate][0] += 1
 
 # Calculate grand total number of votes
 for candidate in candidates:
@@ -43,10 +43,15 @@ for candidate in candidates:
 
 # Calculate percentage of votes for each candidate
 for candidate in candidates:
-    candidates[candidate][1] = candidates[candidate][0] / total_votes * 100
-    if candidates[candidate][1] > winner_percentage:
-        winner_percentage = candidates[candidate][1]
-        winner = candidate
+    # check for divide by 0
+    if total_votes > 0:
+        candidates[candidate][1] = candidates[candidate][0] / total_votes * 100
+        if candidates[candidate][1] > winner_percentage:
+            winner_percentage = candidates[candidate][1]
+            winner = candidate
+    else:
+        winner = "No winner. No votes were cast."
+
 
 # Create output list
 output_rows.append("Election Results\n")

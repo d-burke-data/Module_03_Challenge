@@ -12,7 +12,7 @@ net_profit = 0
 total_change = 0
 last_profit = 0
 
-mean_change = 0.00
+mean_change = 0.0
 
 greatest_increase_month = ""
 greatest_increase_amount = 0
@@ -58,7 +58,11 @@ with open(file_input, 'r', encoding='utf-8') as csv_file:
 
 # Calculate average month-over-month change
 # Use (total_months - 1) because there's no change for the first month
-mean_change = total_change / (total_months - 1)
+# First check for divide by 0
+if total_months > 1:
+    mean_change = total_change / (total_months - 1)
+else:
+    mean_change = 0.0
 
 # Create output list
 output_rows.append("Financial Analysis\n")
